@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edtName);
         edtPassword = findViewById(R.id.edtPassword);
         Button btnSubmit = findViewById(R.id.btnLogin);
-        AlertDialog.Builder builder;
+        final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -38,16 +40,27 @@ public class LoginActivity extends AppCompatActivity {
                 if(name.equals("admin@123") && password.equals("s3cr3t")){
                     txtMsg.setText(R.string.welcome);
                     txtMsg.setTextColor(getResources().getColor(R.color.rightColor));
-                    //edtName.setBackgroundColor(getResources().getColor(R.color.errorColor));
                     Intent mIntent = new Intent(LoginActivity.this, InfoActivity.class);
                     startActivity(mIntent);
                 }
                 else {
-                    
-                    txtMsg.setText(R.string.username_password);
-                    txtMsg.setTextColor(getResources().getColor(R.color.errorColor));
-                    //edtName.setBackgroundColor(getResources().getColor(R.color.errorColor));
-
+                    builder.setMessage("Error with login info");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    //txtMsg.setText(R.string.username_password);
+                    //txtMsg.setTextColor(getResources().getColor(R.color.errorColor));
                 }
 
             }
