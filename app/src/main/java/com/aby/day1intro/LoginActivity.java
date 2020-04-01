@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         Button btnSubmit = findViewById(R.id.btnLogin);
         final AlertDialog.Builder builder;
+
         builder = new AlertDialog.Builder(this);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -41,10 +42,11 @@ public class LoginActivity extends AppCompatActivity {
                     txtMsg.setText(R.string.welcome);
                     txtMsg.setTextColor(getResources().getColor(R.color.rightColor));
                     Intent mIntent = new Intent(LoginActivity.this, InfoActivity.class);
+                    mIntent.putExtra("Name", "Abhishek S J");
                     startActivity(mIntent);
                 }
                 else {
-                    builder.setMessage("Error with login info");
+                    builder.setMessage("UserID/Password Invalid");
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -59,8 +61,6 @@ public class LoginActivity extends AppCompatActivity {
                     });
                     AlertDialog alert = builder.create();
                     alert.show();
-                    //txtMsg.setText(R.string.username_password);
-                    //txtMsg.setTextColor(getResources().getColor(R.color.errorColor));
                 }
 
             }
