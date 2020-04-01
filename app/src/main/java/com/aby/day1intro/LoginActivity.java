@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtName;
     private EditText edtPassword;
     private TextView txtMsg;
+    private Switch aSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,26 @@ public class LoginActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edtName);
         edtPassword = findViewById(R.id.edtPassword);
         Button btnSubmit = findViewById(R.id.btnLogin);
+        aSwitch = findViewById(R.id.switch2);
+
         final AlertDialog.Builder builder;
+        switchSettings();
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+            {
+                if(b)
+                {
+                    Toast.makeText(LoginActivity.this, "RememberMe has been turned ON", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "RememberMe has been turned OFF", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         builder = new AlertDialog.Builder(this);
 
@@ -65,5 +87,10 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void switchSettings(){
+        aSwitch.setTextOn("ON");
+        aSwitch.setTextOff("OFF");
+        aSwitch.setTextColor(getResources().getColor(R.color.errorColor));
     }
 }
