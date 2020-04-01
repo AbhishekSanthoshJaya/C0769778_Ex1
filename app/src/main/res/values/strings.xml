@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Day1Intro</string>
+    <string name="first_android_program">First Android Program!</string>
+    <string name="welcome">Welcome</string>
+    <string name="username_password">Incorrect username/password</string>
+
+</resources>
